@@ -40,9 +40,9 @@ export default class Generator extends Base {
       info: function () {
         this.log(chalk.red(`
 ################################################################
-# NOTE: You are using a pre-release version of
-# generator-angular-fullstack. For a more stable version, run
-# \`npm install -g generator-angular-fullstack@^2.0.0\`
+# Welcome to EP Patterns Yeoman Fullstack Generator! 
+# 
+# 
 ################################################################`));
         this.log('You\'re using the Angular Full-Stack Generator, version ' + this.rootGeneratorVersion());
         this.log(this.yoWelcome);
@@ -327,7 +327,7 @@ export default class Generator extends Base {
 
       ngComponent: function() {
         if(this.skipConfig) return;
-        var appPath = 'client/app/';
+        var appPath = 'client/';
         var extensions = [];
         var filters = [
           'ngroute',
