@@ -41,13 +41,13 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          script: '<%%= yeoman.server %>/app.js',
+          script: '<%%= yeoman.server %>',
           debug: true
         }
       },
       prod: {
         options: {
-          script: '<%%= yeoman.dist %>/<%%= yeoman.server %>/app.js'
+          script: '<%%= yeoman.dist %>/<%%= yeoman.server %>'
         }
       }
     },
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
       livereload: {
         files: [
           '{.tmp,<%%= yeoman.client %>}/{app,components}/**/!(*.spec|*.mock).js',
-          '<%%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}',
           '{.tmp,<%%= yeoman.client %>}/{shared,modules,styles}/**/*.scss',
           '{.tmp,<%%= yeoman.client %>}/{app,shared,modules}/**/*.html',
           '{.tmp,<%%= yeoman.client %>}/{app,shared,modules}/**/*.js',
@@ -450,8 +450,7 @@ module.exports = function (grunt) {
     concurrent: {
       pre: [<% if (filters.stylus) { %>
         'injector:stylus',<% } if (filters.less) { %>
-        'injector:less',<% } if (filters.sass) { %>
-        'injector:sass',<% } %>
+        'injector:less',<% } 
         'ngconstant'
       ],
       server: [<% if(filters.babel) { %>
@@ -674,7 +673,7 @@ module.exports = function (grunt) {
                [<% if(filters.babel) { %>
                  '.tmp/{app,shared,modules}/**/!(*.spec|*.mock).js',<% } else { %>
                  '{.tmp,<%%= yeoman.client %>}/{app,shared,modules}/**/!(*.spec|*.mock).js',<% } %>
-                 '!{.tmp,<%%= yeoman.client %>}/app/app.js'
+                 '!{.tmp,<%%= yeoman.client %>}/app.js'
                ]
             ]
         }

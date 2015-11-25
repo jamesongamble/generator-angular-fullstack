@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('smartstartApp')
+angular.module('<%= scriptAppName %>')
   .controller('NavbarCtrl', function ($scope, $location) {
     $scope.menu = {
       left: [

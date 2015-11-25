@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('smartstartApp')
+angular.module('<%= scriptAppName %>')
   .factory('ModalFactory', function ($rootScope, $modal) {
     /**
      * Opens a modal

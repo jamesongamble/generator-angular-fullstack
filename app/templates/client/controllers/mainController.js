@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('smartstartApp')
+angular.module('<%= scriptAppName %>')
   .controller('MainCtrl', function ($scope, $http) {
     $scope.awesomeThings = [];
 
