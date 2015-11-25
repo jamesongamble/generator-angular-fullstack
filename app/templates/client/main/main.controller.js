@@ -30,7 +30,7 @@ class MainController {
   }<% } %>
 }
 
-angular.module('<%= scriptAppName %>')
-  .controller('MainController', MainController);
+// angular.module('<%= scriptAppName %>')
+//   .controller('MainController', MainController);
 
-})();
+// })();

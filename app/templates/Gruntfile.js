@@ -450,7 +450,7 @@ module.exports = function (grunt) {
     concurrent: {
       pre: [<% if (filters.stylus) { %>
         'injector:stylus',<% } if (filters.less) { %>
-        'injector:less',<% } 
+        'injector:less',<% } %>
         'ngconstant'
       ],
       server: [<% if(filters.babel) { %>
