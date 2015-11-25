@@ -671,7 +671,7 @@ module.exports = function (grunt) {
         files: {
           '<%%= yeoman.client %>/index.html': [
                [<% if(filters.babel) { %>
-                 '.tmp/{app,shared,modules}/**/!(*.spec|*.mock).js',<% } else { %>
+                 '{.tmp,<%%= yeoman.client %>}/{account,admin,components,constants,controllers,modules,shared}/**/!(*.spec|*.mock).js',<% } else { %>
                  '{.tmp,<%%= yeoman.client %>}/{account,admin,components,constants,controllers,modules,shared}/**/!(*.spec|*.mock).js',<% } %>
                  '!{.tmp,<%%= yeoman.client %>}/app.js'
                ]
