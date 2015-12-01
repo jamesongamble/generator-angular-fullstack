@@ -1,12 +1,7 @@
+
+
+
 'use strict';
-var yeoman = require('yeoman-generator');
-
-// var Generator = yeoman.generators.Base.extend({
-//   compose: function() {
-//     this.composeWith('ng-component:controller', {arguments: this.arguments}, { local: require.resolve('generator-ng-component/controller') });
-//   }
-// });
-
 var path = require('path');
 var util = require('util');
 var ngUtil = require('../node_modules/generator-ng-component/util');
@@ -24,26 +19,20 @@ Generator.prototype.prompting = function askFor() {
   var prompts = [
     {
       name: 'dir',
-      message: 'Where would you like to create this hat??',
-      default: 'client/'
+      message: 'Where would you like to create this controller?',
+      default: 'client/modules/'
     }
   ];
 
   this.prompt(prompts, function (props) {
-    // if (props.dir === 'client/') {
-    //   props.dir = "";
-    // }
-    this.dir = path.join('client/modules/' + props.dir);
+    if (props.dir === 'client/') {
+      props.dir = "";
+    }
+    this.dir = path.join(props.dir);
     done();
-  }.bind(this));  
+  }.bind(this));
 };
 
 Generator.prototype.writing = function createFiles() {
-  console.log(this);
   ngUtil.copyTemplates(this, 'controller');
 };
-
-module.exports = Generator;
-
-
-
