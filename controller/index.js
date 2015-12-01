@@ -28,7 +28,7 @@ Generator.prototype.prompting = function askFor() {
     if (props.dir === 'client/') {
       props.dir = "";
     }
-    this.dir = path.join(props.dir);
+    this.dir = path.join('client/modules/' + props.dir);
     done();
   }.bind(this));
 };
