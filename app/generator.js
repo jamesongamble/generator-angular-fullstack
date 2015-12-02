@@ -41,6 +41,7 @@ export default class Generator extends Base {
         this.log(chalk.red(`
 ################################################################
 # Welcome to EP Patterns Yeoman Fullstack Generator! 
+# For more detailed instructions, head to patterns.ep.com
 ################################################################`));
         this.log('You\'re using the Angular Full-Stack Generator, version ' + this.rootGeneratorVersion());
         this.log(this.yoWelcome);
@@ -100,40 +101,15 @@ export default class Generator extends Base {
             message: 'What would you like to write markup with?',
             choices: ['HTML', 'Jade'],
             filter: function( val ) { return val.toLowerCase(); }
-          }, {
-            type: 'list',
-            name: 'stylesheet',
-            default: 1,
-            message: 'What would you like to write stylesheets with?',
-            choices: [ 'CSS', 'Sass', 'Stylus', 'Less'],
-            filter: function( val ) { return val.toLowerCase(); }
-          },  {
-            type: 'list',
-            name: 'router',
-            default: 1,
-            message: 'What Angular router would you like to use?',
-            choices: [ 'ngRoute', 'uiRouter'],
-            filter: function( val ) { return val.toLowerCase(); }
-          }, {
-            type: 'confirm',
-            name: 'bootstrap',
-            message: 'Would you like to include Bootstrap?'
-          }, {
-            type: 'confirm',
-            name: 'uibootstrap',
-            message: 'Would you like to include UI Bootstrap?',
-            when: function (answers) {
-              return answers.bootstrap;
-            }
-          }], function (answers) {
-
+          }
+          ], function (answers) {
             this.filters.js = true;
             this.filters.babel = true;
             this.filters[answers.markup] = true;
-            this.filters[answers.stylesheet] = true;
-            this.filters[answers.router] = true;
-            this.filters.bootstrap = !!answers.bootstrap;
-            this.filters.uibootstrap =  !!answers.uibootstrap;
+            this.filters['sass'] = true;
+            this.filters['uirouter'] = true;
+            this.filters.bootstrap = true;
+            this.filters.uibootstrap =  true;
             cb();
           }.bind(this));
       },

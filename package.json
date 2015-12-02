@@ -54,6 +54,7 @@
     "grunt-env": "^0.4.1",
     "grunt-mocha-test": "^0.12.7",
     "grunt-release": "^0.13.0",
+    "grunt-sass": "^1.1.0",
     "jit-grunt": "^0.9.1",
     "mocha": "^2.2.5",
     "q": "^1.0.1",

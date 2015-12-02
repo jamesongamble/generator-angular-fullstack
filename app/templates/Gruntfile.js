@@ -96,8 +96,8 @@ module.exports = function (grunt) {
         tasks: ['stylus', 'postcss']
       },<% } if (filters.sass) { %>
       sass: {
-        files: ['<%%= yeoman.client %>/{modules,shared,styles}/**/*.{scss,sass}'],
-        tasks: ['sass', 'postcss']
+       files: ['<%%= yeoman.client %>/{modules,shared,styles}/**/*.{scss,sass}'],
+       tasks: ['sass'],
       },<% } if (filters.less) { %>
       injectLess: {
         files: ['<%%= yeoman.client %>/{app,components}/**/*.less'],
@@ -631,16 +631,7 @@ module.exports = function (grunt) {
           compass: false
         },
         files: {
-          '.tmp/app/app.css' : '<%%= yeoman.client %>/styles/app.scss'
-        }
-      }
-    },<% } if (filters.less) { %>
-
-    // Compiles Less to CSS
-    less: {
-      server: {
-        files: {
-          '.tmp/app/app.css' : '<%%= yeoman.client %>/app/app.less'
+          '.tmp/app/app.css': '<%%= yeoman.client %>/styles/app.scss' // destination, source
         }
       }
     },<% } %>
