@@ -95,17 +95,11 @@ export default class Generator extends Base {
             message: 'What would you like to write scripts with?',
             choices: ['Babel', 'TypeScript'],
             filter: function(val) { return val.toLowerCase(); }
-          }, */{
-            type: 'list',
-            name: 'markup',
-            message: 'What would you like to write markup with?',
-            choices: ['HTML', 'Jade'],
-            filter: function( val ) { return val.toLowerCase(); }
-          }
+          }, */
           ], function (answers) {
             this.filters.js = true;
             this.filters.babel = true;
-            this.filters[answers.markup] = true;
+            this.filters['html'] = true;
             this.filters['sass'] = true;
             this.filters['uirouter'] = true;
             this.filters.bootstrap = true;

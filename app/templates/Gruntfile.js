@@ -67,7 +67,6 @@ module.exports = function (grunt) {
       },
       injectJS: {
         files: [
-          '<%%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock).js',
           '<%%= yeoman.client %>/{app,shared,modules,controllers,directives,factories,services,modules}/**/*.js',
           '!<%%= yeoman.client %>/{app,shared,modules}/**/*.spec.js',
           '!<%%= yeoman.client %>/{app,shared,modules}/**/*.mock.js',
@@ -86,31 +85,11 @@ module.exports = function (grunt) {
       jsTest: {
         files: ['<%%= yeoman.client %>/{app,components}/**/*.{spec,mock}.js'],
         tasks: ['newer:jshint:all', 'wiredep:test', 'karma']
-      },<% if (filters.stylus) { %>
-      injectStylus: {
-        files: ['<%%= yeoman.client %>/{app,components}/**/*.styl'],
-        tasks: ['injector:stylus']
-      },
-      stylus: {
-        files: ['<%%= yeoman.client %>/{app,components}/**/*.styl'],
-        tasks: ['stylus', 'postcss']
-      },<% } if (filters.sass) { %>
+      },<% if (filters.sass) %>
       sass: {
        files: ['<%%= yeoman.client %>/{modules,shared,styles}/**/*.{scss,sass}'],
        tasks: ['sass'],
-      },<% } if (filters.less) { %>
-      injectLess: {
-        files: ['<%%= yeoman.client %>/{app,components}/**/*.less'],
-        tasks: ['injector:less']
       },
-      less: {
-        files: ['<%%= yeoman.client %>/{app,components}/**/*.less'],
-        tasks: ['less', 'postcss']
-      },<% } if (filters.jade) { %>
-      jade: {
-        files: ['<%%= yeoman.client %>/{app,components}/**/*.jade'],
-        tasks: ['jade']
-      },<% } %>
       gruntfile: {
         files: ['Gruntfile.js']
       },
@@ -369,12 +348,12 @@ module.exports = function (grunt) {
       },
       main: {
         cwd: '<%%= yeoman.client %>',
-        src: ['{app,shared,modules}/**/*.html'],
+        src: ['{components,templates,admin,account,constants,modulues,shared}/**/*.html'],
         dest: '.tmp/templates.js'
       },
       tmp: {
         cwd: '.tmp',
-        src: ['{app,components}/**/*.html'],
+        src: ['{components,templates,admin,account,constants,modulues,shared}/**/*.html'],
         dest: '.tmp/tmp-templates.js'
       }
     },
@@ -448,24 +427,16 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
-      pre: [<% if (filters.stylus) { %>
-        'injector:stylus',<% } if (filters.less) { %>
-        'injector:less',<% } %>
+      pre: [
         'ngconstant'
       ],
       server: [<% if(filters.babel) { %>
-        'newer:babel:client',<% } if(filters.jade) { %>
-        'jade',<% } if(filters.stylus) { %>
-        'stylus',<% } if(filters.sass) { %>
-        'sass',<% } if(filters.less) { %>
-        'less',<% } %>
+        'newer:babel:client',<% } %>
+        'sass'
       ],
       test: [<% if(filters.babel) { %>
-        'newer:babel:client',<% } if(filters.jade) { %>
-        'jade',<% } if(filters.stylus) { %>
-        'stylus',<% } if(filters.sass) { %>
-        'sass',<% } if(filters.less) { %>
-        'less',<% } %>
+        'newer:babel:client',<% } %>
+        'sass'
       ],
       debug: {
         tasks: [
@@ -477,12 +448,8 @@ module.exports = function (grunt) {
         }
       },
       dist: [<% if(filters.babel) { %>
-        'newer:babel:client',<% } if(filters.jade) { %>
-        'jade',<% } if(filters.stylus) { %>
-        'stylus',<% } if(filters.sass) { %>
-        'sass',<% } if(filters.less) { %>
-        'less',<% } %>
-        'imagemin'
+        'newer:babel:client',<% } %>
+        'sass'
       ]
     },
 
@@ -566,25 +533,7 @@ module.exports = function (grunt) {
         NODE_ENV: 'production'
       },
       all: localConfig
-    },<% if (filters.jade) { %>
-
-    // Compiles Jade to html
-    jade: {
-      compile: {
-        options: {
-          data: {
-            debug: false
-          }
-        },
-        files: [{
-          expand: true,
-          cwd: '<%%= yeoman.client %>',
-          src: ['{app,components}/**/*.jade'],
-          dest: '.tmp',
-          ext: '.html'
-        }]
-      }
-    },<% } %>
+    },
 
     // Compiles ES6 to JavaScript using Babel
     babel: {
@@ -595,7 +544,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%%= yeoman.client %>',
-          src: ['{app,components}/**/!(*.spec).js'],
+          src: ['{app,components,account,admin,constants,controllers,modules,shared}/**/!(*.spec).js', 'app.js'],
           dest: '.tmp'
         }]
       },<% } %>
@@ -610,19 +559,7 @@ module.exports = function (grunt) {
           dest: '<%%= yeoman.dist %>/<%%= yeoman.server %>'
         }]
       }
-    },<% if(filters.stylus) { %>
-
-    // Compiles Stylus to CSS
-    stylus: {
-      server: {
-        options: {
-          "include css": true
-        },
-        files: {
-          '.tmp/app/app.css' : '<%%= yeoman.client %>/app/app.styl'
-        }
-      }
-    },<% } if (filters.sass) { %>
+    },<% if (filters.sass) { %>
 
     // Compiles Sass to CSS
     sass: {
@@ -662,54 +599,14 @@ module.exports = function (grunt) {
         files: {
           '<%%= yeoman.client %>/index.html': [
                [<% if(filters.babel) { %>
-                 '{.tmp,<%%= yeoman.client %>}/{account,admin,components,constants,controllers,modules,shared}/**/!(*.spec|*.mock).js',<% } else { %>
-                 '{.tmp,<%%= yeoman.client %>}/{account,admin,components,constants,controllers,modules,shared}/**/!(*.spec|*.mock).js',<% } %>
+                 '<%%= yeoman.client %>/{account,admin,constants,components,controllers,modules,shared}/**/!(*.spec|*.mock).js',<% } else { %>
+                 '<%%= yeoman.client %>/{account,admin,constants,components,controllers,modules,shared}/**/!(*.spec|*.mock).js',<% } %>
                  '!{.tmp,<%%= yeoman.client %>}/app.js'
                ]
             ]
         }
-      },<% if (filters.stylus) { %>
+      },
 
-      // Inject component styl into app.styl
-      stylus: {
-        options: {
-          transform: function(filePath) {
-            var yoClient = grunt.config.get('yeoman.client');
-            filePath = filePath.replace('/' + yoClient + '/app/', '');
-            filePath = filePath.replace('/' + yoClient + '/components/', '../components/');
-            return '@import \'' + filePath + '\';';
-          },
-          starttag: '// injector',
-          endtag: '// endinjector'
-        },
-        files: {
-          '<%%= yeoman.client %>/app/app.styl': [
-            '<%%= yeoman.client %>/{app,components}/**/*.styl',
-            '!<%%= yeoman.client %>/app/app.styl'
-          ]
-        }
-      },<% } if (filters.sass) { %>
-
-
-      // Inject component less into app.less
-      less: {
-        options: {
-          transform: function(filePath) {
-            var yoClient = grunt.config.get('yeoman.client');
-            filePath = filePath.replace('/' + yoClient + '/app/', '');
-            filePath = filePath.replace('/' + yoClient + '/components/', '../components/');
-            return '@import \'' + filePath + '\';';
-          },
-          starttag: '// injector',
-          endtag: '// endinjector'
-        },
-        files: {
-          '<%%= yeoman.client %>/app/app.less': [
-            '<%%= yeoman.client %>/{app,components}/**/*.less',
-            '!<%%= yeoman.client %>/app/app.less'
-          ]
-        }
-      },<% } %>
 
       // Inject component css into index.html
       css: {
