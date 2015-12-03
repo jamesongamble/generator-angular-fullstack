@@ -87,7 +87,7 @@ export default class Generator extends Base {
         if(this.skipConfig) return;
         var cb = this.async();
 
-        this.log('# Client\n');
+        // this.log('# Client\n');
 
         this.prompt([/*{
             type: 'list',
@@ -113,7 +113,7 @@ export default class Generator extends Base {
         var cb = this.async();
         var self = this;
 
-        this.log('\n# Server\n');
+        // this.log('\n# Server\n');
 
         this.prompt([{
           type: 'checkbox',
