@@ -142,38 +142,41 @@ export default class Generator extends Base {
           when: function(answers) {
             return answers.odms && answers.odms.length > 1;
           }
-        }, {
-          type: 'confirm',
-          name: 'auth',
-          message: 'Would you scaffold out an authentication boilerplate?',
-          when: function (answers) {
-            return answers.odms && answers.odms.length !== 0;
-          }
-        }, {
-          type: 'checkbox',
-          name: 'oauth',
-          message: 'Would you like to include additional oAuth strategies?',
-          when: function (answers) {
-            return answers.auth;
-          },
-          choices: [
-            {
-              value: 'googleAuth',
-              name: 'Google',
-              checked: false
-            },
-            {
-              value: 'facebookAuth',
-              name: 'Facebook',
-              checked: false
-            },
-            {
-              value: 'twitterAuth',
-              name: 'Twitter',
-              checked: false
-            }
-          ]
-        }, {
+        }, 
+        // {
+        //   type: 'confirm',
+        //   name: 'auth',
+        //   message: 'Would you scaffold out an authentication boilerplate?',
+        //   when: function (answers) {
+        //     return answers.odms && answers.odms.length !== 0;
+        //   }
+        // }, 
+        // {
+        //   type: 'checkbox',
+        //   name: 'oauth',
+        //   message: 'Would you like to include additional oAuth strategies?',
+        //   when: function (answers) {
+        //     return answers.auth;
+        //   },
+        //   choices: [
+        //     {
+        //       value: 'googleAuth',
+        //       name: 'Google',
+        //       checked: false
+        //     },
+        //     {
+        //       value: 'facebookAuth',
+        //       name: 'Facebook',
+        //       checked: false
+        //     },
+        //     {
+        //       value: 'twitterAuth',
+        //       name: 'Twitter',
+        //       checked: false
+        //     }
+        //   ]
+        // },
+         {
           type: 'confirm',
           name: 'socketio',
           message: 'Would you like to use socket.io?',
