@@ -340,7 +340,7 @@ export default class Generator extends Base {
           "'ngCookies'",
           "'ngResource'",
           "'ngSanitize'",
-          "ep.common"
+          "'ep.common'"
         ];
         if(this.filters.ngroute) angModules.push("'ngRoute'");
         if(this.filters.socketio) angModules.push("'btford.socket-io'");

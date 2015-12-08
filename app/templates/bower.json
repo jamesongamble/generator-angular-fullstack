@@ -13,6 +13,7 @@
     "angular-bootstrap": "~0.11.0",
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
+    "ep-common": "https://github.com/ZENxd/ep-common.git",
     "angular-ui-router": "~0.2.15",
     "angular-socket-io": "~0.7.0",
     "angular-validation-match": "~1.6.0"
