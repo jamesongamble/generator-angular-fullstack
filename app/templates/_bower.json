@@ -14,6 +14,7 @@
     "angular-route": "~1.4.0",<% } if (filters.uibootstrap) { %>
     "angular-bootstrap": "~0.13.0",<% } %>
     "font-awesome": ">=4.1.0",
+    "ep-common": "https://github.com/ZENxd/ep-common.git",
     "lodash": "~2.4.1"<% if(filters.socketio) { %>,
     "angular-socket-io": "~0.7.0"<% } if (filters.uirouter) { %>,
     "angular-ui-router": "~0.2.15"<% } if (filters.auth) { %>,
