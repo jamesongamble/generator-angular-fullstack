@@ -27,7 +27,13 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <% if (filters.ngroute) { %><div ng-view=""></div><% } %><% if (filters.uirouter) { %><div ui-view=""></div><% } %>
+    <% if (filters.ngroute) { %><div ng-view=""></div><% } %><% if (filters.uirouter) { %>
+
+    <div ng-include="'shared/navbar/templates/navbar.html'"></div>
+    <div ui-view=""></div>
+    <div ng-include="'shared/footer/templates/footer.html'"></div>
+
+    <% } %>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
